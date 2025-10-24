@@ -25,10 +25,7 @@ nReal = 0
 puntuaje = 0
 
 while nReal < 1 or nReal > 5:
-    try:
-        nReal = int(input("Introduce la valoración que le das a la película entre 1 y 5: "))
-    except ValueError:
-        print("Introduce un número válido")
+    nReal = int(input("Introduce la valoración que le das a la película entre 1 y 5: "))
 
 errorAbs = nReal - nRandom
 
