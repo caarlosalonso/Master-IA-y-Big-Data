@@ -26,11 +26,11 @@ experimentos_db = {
             "epochs": 100
         },
         "metricas_entrenamiento": {
-            "loss": [2.3, 1.8, 1.5, 1.2, 0.95, 0.87, 0.81, 0.78, 0.76, 0.75],
+            "loss": [1.2, 1.0, 0.9, 0.85, 0.80, 0.78, 0.75, 0.73, 0.70, 0.68],
             "accuracy": [0.45, 0.58, 0.65, 0.71, 0.76, 0.79, 0.82, 0.84, 0.85, 0.86]
         },
         "metricas_validacion": {
-            "loss": [2.4, 1.9, 1.6, 1.4, 1.1, 0.98, 0.92, 0.89, 0.88, 0.87],
+            "loss": [1.3, 1.2, 1.25, 1.3, 1.35, 1.37, 1.38, 1.39, 1.40, 1.41],
             "accuracy": [0.43, 0.56, 0.63, 0.69, 0.74, 0.77, 0.80, 0.82, 0.83, 0.84]
         },
         "dependencias": {"torch", "torchvision", "numpy", "pillow"},
@@ -128,200 +128,6 @@ experimentos_db = {
 }
 
 """
-## Parte 1: Análisis de Convergencia y Estabilidad (LISTAS - 25%)
-
-Implementa un sistema de análisis de métricas que detecte patrones de entrenamiento problemáticos.
-
-**Funciones requeridas:**
-"""
-
-def detectar_overfitting_temprano(train_metrics: dict, val_metrics: dict, ventana: int = 3) -> dict:
-    """
-    Detecta overfitting analizando la divergencia entre training y validation loss.
-
-    Overfitting temprano ocurre cuando:
-    - El training loss disminuye consistentemente
-    - El validation loss se estanca o aumenta
-    - Esta condición se mantiene por 'ventana' épocas consecutivas
-
-    Args:
-        train_metrics: {"loss": [...], "accuracy": [...]}
-        val_metrics: {"loss": [...], "accuracy": [...]}
-        ventana: Número de épocas consecutivas para confirmar patrón
-
-    Returns:
-        {
-            "overfitting_detectado": bool,
-            "epoca_inicio": int o None,
-            "diferencia_loss_promedio": float,
-            "epocas_afectadas": list de índices
-        }
-    """
-
-    train_loss = train_metrics["loss"]
-    val_loss = val_metrics["loss"]
-
-    for [tl, vl in ]
-
-    return 
-
-    pass
-
-def calcular_tasa_convergencia(losses: list, metodo: str = "exponencial") -> float:
-    """
-    Calcula la tasa de convergencia del entrenamiento.
-
-    Métodos:
-    - "lineal": pendiente promedio entre épocas consecutivas
-    - "exponencial": ajuste a decay exponencial
-
-    Una tasa más negativa indica convergencia más rápida.
-
-    Args:
-        losses: Lista de valores de loss por época
-        metodo: "lineal" o "exponencial"
-
-    Returns:
-        Tasa de convergencia (valor negativo indica mejora)
-    """
-    pass
-
-def identificar_epocas_criticas(train_losses: list, val_losses: list, threshold: float = 0.05) -> list:
-    """
-    Identifica épocas donde el modelo muestra comportamiento inestable.
-
-    Una época es crítica si:
-    - El loss aumenta respecto a la época anterior en más de threshold
-    - Tanto en training como en validation
-
-    Args:
-        train_losses: Losses de entrenamiento
-        val_losses: Losses de validación
-        threshold: Umbral de aumento relativo (5% por defecto)
-
-    Returns:
-        Lista de tuplas (epoca_idx, aumento_train, aumento_val)
-    """
-    pass
-
-# Casos de prueba para la parte 1
-experiment_1 = experimentos_db["exp_20241101_001"]
-
-# detectar_overfitting_temprano()
-train_metrics = experiment_1["metricas_entrenamiento"]
-val_metrics = experiment_1["metricas_validacion"]
-
-overfitting_reslt = detectar_overfitting_temprano(train_metrics, val_metrics)
-
-
-
-"""
-## Parte 2: Gestión de Metadatos y Arquitecturas (TUPLAS - 20%)
-
-Trabaja con los metadatos inmutables de las arquitecturas de red.
-
-**Funciones requeridas:**
-"""
-
-def calcular_complejidad_modelo(metadata: tuple) -> dict:
-    """
-    Calcula métricas de complejidad basadas en dimensiones de entrada.
-
-    metadata formato: (height, width, channels, num_classes)
-
-    Returns:
-        {
-            "input_size": int (height * width * channels),
-            "output_size": int (num_classes),
-            "aspect_ratio": float (height / width),
-            "complejidad_relativa": str ("baja", "media", "alta")
-        }
-
-    Complejidad relativa:
-    - baja: input_size < 50000
-    - media: 50000 <= input_size < 200000
-    - alta: input_size >= 200000
-    """
-    pass
-
-def comparar_arquitecturas(exp_ids: list, experimentos_db: dict) -> list:
-    """
-    Compara arquitecturas de múltiples experimentos.
-
-    Returns:
-        Lista de tuplas ordenadas por complejidad descendente:
-        [(exp_id, modelo, input_size, num_classes), ...]
-    """
-    pass
-
-def validar_compatibilidad_transfer_learning(metadata_source: tuple, metadata_target: tuple) -> dict:
-    """
-    Valida si dos arquitecturas son compatibles para transfer learning.
-
-    Compatibilidad requiere:
-    - Misma resolución (height, width)
-    - Mismo número de canales
-    - Puede diferir en num_classes
-
-    Returns:
-        {
-            "compatible": bool,
-            "requiere_ajuste_head": bool,
-            "diferencia_clases": int
-        }
-    """
-    pass
-
-def calcular_complejidad_modelo(metadata: tuple) -> dict:
-    """
-    Calcula métricas de complejidad basadas en dimensiones de entrada.
-
-    metadata formato: (height, width, channels, num_classes)
-
-    Returns:
-        {
-            "input_size": int (height * width * channels),
-            "output_size": int (num_classes),
-            "aspect_ratio": float (height / width),
-            "complejidad_relativa": str ("baja", "media", "alta")
-        }
-
-    Complejidad relativa:
-    - baja: input_size < 50000
-    - media: 50000 <= input_size < 200000
-    - alta: input_size >= 200000
-    """
-    pass
-
-def comparar_arquitecturas(exp_ids: list, experimentos_db: dict) -> list:
-    """
-    Compara arquitecturas de múltiples experimentos.
-
-    Returns:
-        Lista de tuplas ordenadas por complejidad descendente:
-        [(exp_id, modelo, input_size, num_classes), ...]
-    """
-    pass
-
-def validar_compatibilidad_transfer_learning(metadata_source: tuple, metadata_target: tuple) -> dict:
-    """
-    Valida si dos arquitecturas son compatibles para transfer learning.
-
-    Compatibilidad requiere:
-    - Misma resolución (height, width)
-    - Mismo número de canales
-    - Puede diferir en num_classes
-
-    Returns:
-        {
-            "compatible": bool,
-            "requiere_ajuste_head": bool,
-            "diferencia_clases": int
-        }
-    """
-    pass
-
-"""
 ## Parte 3: Optimización de Configuraciones (DICCIONARIOS - 30%)
 
 Analiza y optimiza configuraciones de hiperparámetros basándote en resultados históricos.
@@ -342,7 +148,26 @@ def ranking_experimentos(experimentos_db: dict, criterio: str = "accuracy_final"
     Returns:
         Lista de tuplas: [(exp_id, valor_metrica), ...] ordenada descendente
     """
+
+    for exp_id, exp_data in experimentos_db.items():
+        # [-1] Obtiene el último elemenento de la lista para cada experimento
+        if criterio == "accuracy_final":
+            accuracy = exp_data["metricas_validacion"]["accuracy"][-1]
+        elif criterio == "convergencia":
+            convergencia = exp_data["metricas_validacion"]["accuracy"]
     pass
+
+
+
+    rank_experimentos = ranking_experimentos(experimentos_db, "accuracy_final")
+
+    print("=" * 70)
+    print(f" Experimento: {exp_id}")
+    print(f" Modelo: {exp_data['modelo']}")
+    print(f" Dataset: {exp_data['dataset']}\n")
+
+    print(rank_experimentos)
+    print("=" * 70)
 
 def mejores_hiperparametros_por_dataset(experimentos_db: dict) -> dict:
     """
@@ -410,62 +235,6 @@ Valida compatibilidad de entornos y optimiza el uso de recursos computacionales.
 **Funciones requeridas:**
 """
 
-def dependencias_comunes(experimentos_db: dict) -> dict:
-    """
-    Analiza las dependencias de todos los experimentos.
-
-    Returns:
-        {
-            "universales": set,  # Presentes en TODOS los experimentos
-            "mayoritarias": set,  # Presentes en >50% experimentos
-            "opcionales": set,   # Presentes en <50% experimentos
-            "por_modelo": {
-                "ResNet50": set,
-                "VGG16": set,
-                ...
-            }
-        }
-    """
-    pass
-
-def validar_entorno(dependencias_disponibles: set, exp_id: str, experimentos_db: dict) -> dict:
-    """
-    Valida si un entorno tiene las dependencias necesarias para un experimento.
-
-    Returns:
-        {
-            "puede_ejecutar": bool,
-            "dependencias_faltantes": set,
-            "dependencias_adicionales": set,  # Están disponibles pero no necesarias
-            "recomendaciones": list de str
-        }
-    """
-    pass
-
-def optimizar_uso_gpu(experimentos_db: dict) -> dict:
-    """
-    Analiza el uso de GPUs y sugiere optimizaciones.
-
-    Calcula por GPU:
-    - Tiempo total utilizado
-    - Número de experimentos ejecutados
-    - Tiempo promedio por experimento
-    - Modelos más ejecutados en cada GPU
-
-    Returns:
-        {
-            "NVIDIA_A100": {
-                "tiempo_total_minutos": int,
-                "num_experimentos": int,
-                "tiempo_promedio": float,
-                "modelos_principales": set,
-                "utilizacion_porcentaje": float  # Asumiendo max 1000 min disponibles
-            },
-            ...
-        }
-    """
-    pass
-
 def conflictos_dependencias(experimentos_a_ejecutar: list, experimentos_db: dict) -> dict:
     """
     Detecta posibles conflictos si se ejecutan múltiples experimentos simultáneamente.
@@ -482,6 +251,8 @@ def conflictos_dependencias(experimentos_a_ejecutar: list, experimentos_db: dict
         }
     """
     pass
+
+
 
 """
 ## Función Integradora Final (BONUS - 20% extra)
