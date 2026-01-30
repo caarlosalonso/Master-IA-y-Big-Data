@@ -247,3 +247,12 @@ predicciones = X_escenarios @ coeficientes
 p5 = np.percentile(predicciones, 5)
 p50 = np.percentile(predicciones, 50)
 p95 = np.percentile(predicciones, 95)
+
+#6. Responded en comentarios:
+#    - ¿Cuántas bicicletas debería preparar operaciones si quiere cubrir el 95% de los escenarios?
+
+#    - ¿Cuál es el rango de incertidumbre (P95 - P5)?
+#    - ¿Es un rango aceptable para planificación?
+print(f"\nPredicción P5: {p5:.2f} bicicletas")
+print(f"Predicción P50: {p50:.2f} bicicletas")
+print(f"Predicción P95: {p95:.2f} bicicletas")
