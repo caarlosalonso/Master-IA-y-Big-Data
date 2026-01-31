@@ -155,6 +155,15 @@ def ranking_experimentos(experimentos_db: dict, criterio: str = "accuracy_final"
             accuracy = exp_data["metricas_validacion"]["accuracy"][-1]
         elif criterio == "convergencia":
             convergencia = exp_data["metricas_validacion"]["accuracy"]
+            epocas_necesarias = None
+            for i, acc in enumerate(convergencia):
+                if acc >= 0.80:
+                    epocas_necesarias = i + 1 # Épocas se cuentan desde 1
+                    break
+
+        # Si nunca alcanzó 80%, usar un valor grande (ej: 999)
+        if epocas_necesarias is None:
+            epocas_necesarias = 999
     pass
 
 
